@@ -10,7 +10,7 @@ ARG CXXFLAGS="\
 
 # install build packages
 RUN \
- apk add --no-cache \
+	apk add --no-cache \
 	boost \
 	boost-dev \
 	cmake \
@@ -33,7 +33,7 @@ RUN \
 
 # fetch source
 RUN \
- mkdir -p \
+	mkdir -p \
 	/tmp/quassel-src && \
 	cd /tmp/quassel-src && \
 	git clone https://github.com/quassel/quassel .
@@ -43,14 +43,14 @@ RUN \
 	mkdir /tmp/quassel-src/build && \
 	cd /tmp/quassel-src/build && \
 	cmake \
-		-DCMAKE_BUILD_TYPE="Release" \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DUSE_QT5=ON \
-		-DWANT_CORE=ON \
-		-DWANT_MONO=OFF \
-		-DWANT_QTCLIENT=OFF \
-		-DWITH_KDE=OFF \
-		/tmp/quassel-src && \
+	-DCMAKE_BUILD_TYPE="Release" \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DUSE_QT5=ON \
+	-DWANT_CORE=ON \
+	-DWANT_MONO=OFF \
+	-DWANT_QTCLIENT=OFF \
+	-DWITH_KDE=OFF \
+	/tmp/quassel-src && \
 	make -j4 && \
 	make DESTDIR=/build/quassel install && \
 	paxmark -m /build/quassel/usr/bin/quasselcore
@@ -62,7 +62,7 @@ ENV HOME /config
 
 # install runtime packages
 RUN \
- apk add --no-cache \
+	apk add --no-cache \
 	icu-libs \
 	openssl \
 	qt5-qtbase \
